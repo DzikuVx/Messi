@@ -1,0 +1,18 @@
+{
+  "name": "pspychalski/Messi",
+  "main": "messi.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/DzikuVx/Messi",
+  "authors": [
+    "Pawel <pspychalski@gmail.com>"
+  ],
+  "description": "Simple jQuery modals plugin",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
