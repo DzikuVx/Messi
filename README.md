@@ -17,12 +17,12 @@ Display text, html content, images and ajax requests with 5KB code.
 Messi requires jQuery framework to work, so include it first of all in your project. After that, include in the `head` of your page the stylesheet:
 
 ```html
-<link rel="stylesheet" href="messi.min.css" />
+<link rel="stylesheet" href="messi.css" />
 ```
 And before the `</body>` the script:
 
 ```html
-<script src="messi.min.js"></script>
+<script src="messi.js"></script>
 ```
 
 Now you can start using Messi in your page, for example:
