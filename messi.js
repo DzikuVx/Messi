@@ -180,8 +180,10 @@ Messi.prototype = {
         this.messi.css({
             top: this.options.viewport.top,
             left: this.options.viewport.left,
-            'z-index': this.options.zIndex + jQuery('.messi').length
-        }).show().animate({opacity: 1}, 300);
+            'z-index': this.options.zIndex + jQuery('.messi').length,
+            '-ms-filter': "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
+
+    }).show().animate({opacity: 1}, 300);
 
         // cancelamos el scroll
         //document.documentElement.style.overflow = "hidden";
