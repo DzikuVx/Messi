@@ -101,7 +101,7 @@ function Messi(data, options) {
         'z-index': _this.options.zIndex + jQuery('.messi').length
     }).appendTo(document.body) : null;
 
-    if (_this.modal) {
+    if (_this.modal && _this.options.closeOnModalClick) {
         _this.modal.bind('click', function () {
             _this.hide();
         });
@@ -140,6 +140,7 @@ Messi.prototype = {
         titleClass: null,                        // title style: info, warning, success, error
         modal: false,                            // shows message in modal (loads background)
         modalOpacity: .2,                        // modal background opacity
+        closeOnModalClick: true,                 // modal should close on overlay click
         padding: '10px',                         // content padding
         show: true,                              // show message after load
         unload: true,                            // unload message after hide
