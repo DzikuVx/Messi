@@ -8,8 +8,7 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-
-// Clase principal
+/*globals jQuery */
 function Messi(data, options) {
 
     var _this = this;
@@ -38,13 +37,13 @@ function Messi(data, options) {
 
                 jQuery('.messi-titlebox', this.messi).prepend(close);
 
-            };
+            }
 
-        };
+        }
 
         if (_this.options.titleClass != null) jQuery('.messi-titlebox', this.messi).addClass(_this.options.titleClass);
 
-    };
+    }
 
     // ajustamos el ancho
     if (_this.options.width != null) jQuery('.messi-box', _this.messi).css('width', _this.options.width);
@@ -67,14 +66,12 @@ function Messi(data, options) {
             jQuery('.messi-actions', this.messi).append(btn);
 
         }
-        ;
 
     } else {
 
         jQuery('.messi-footbox', this.messi).remove();
 
     }
-    ;
 
     // preparamos el botón de cerrar automáticamente
     if (_this.options.buttons.length === 0 && _this.options.title == null && !_this.options.autoclose) {
@@ -88,10 +85,8 @@ function Messi(data, options) {
             jQuery('.messi-content', this.messi).prepend(close);
 
         }
-        ;
 
     }
-    ;
 
     // activamos la pantalla modal
     _this.modal = (_this.options.modal) ? jQuery('<div class="messi-modal"></div>').css({
@@ -104,6 +99,12 @@ function Messi(data, options) {
     if (_this.modal && _this.options.closeOnModalClick) {
         _this.modal.bind('click', function () {
             _this.hide();
+        });
+    }
+
+    if (_this.options.closeOnEscKey) {
+        jQuery(document).keyup(function (e) {
+            _this.keyUp(e);
         });
     }
 
@@ -121,11 +122,10 @@ function Messi(data, options) {
             _this.hide();
         }, _this.options.autoclose, this);
     }
-    ;
 
     return _this;
 
-};
+}
 
 Messi.prototype = {
 
@@ -141,6 +141,7 @@ Messi.prototype = {
         modal: false,                            // shows message in modal (loads background)
         modalOpacity: .2,                        // modal background opacity
         closeOnModalClick: true,                 // modal should close on overlay click
+        closeOnEscKey: true,                     // modal should close on ESC key press
         padding: '10px',                         // content padding
         show: true,                              // show message after load
         unload: true,                            // unload message after hide
@@ -168,15 +169,25 @@ Messi.prototype = {
 
     },
 
+    keyUp: function (e) {
+        if (e.keyCode == 27) {
+            this.hide();
+        }
+    },
+
     show: function () {
 
-        if (this.visible) return;
+        if (this.visible) {
+            return;
+        }
 
         if (this.options.modal && this.modal != null) this.modal.show();
         this.messi.appendTo(document.body);
 
         // obtenemos el centro de la pantalla si la opción de centrar está activada
-        if (this.options.center) this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+        if (this.options.center) {
+            this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+        }
 
         this.messi.css({
             top: this.options.viewport.top,
@@ -184,7 +195,7 @@ Messi.prototype = {
             'z-index': this.options.zIndex + jQuery('.messi').length,
             '-ms-filter': "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
 
-    }).show().animate({opacity: 1}, 300);
+        }).show().animate({opacity: 1}, 300);
 
         // cancelamos el scroll
         //document.documentElement.style.overflow = "hidden";
@@ -216,12 +227,11 @@ Messi.prototype = {
         if (this.options.modal) {
             jQuery('.messi-modal').css({width: jQuery(document).width(), height: jQuery(document).height()});
         }
-        ;
+
         if (this.options.center) {
             this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
             this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left});
         }
-        ;
     },
 
     toggle: function () {
@@ -235,7 +245,7 @@ Messi.prototype = {
             this.resize();
         });
         this.messi.remove();
-    },
+    }
 
 };
 
@@ -259,7 +269,7 @@ jQuery.extend(Messi, {
 
         var buttons = [
             {id: 'yes', label: 'Yes', val: 'Y', "class": 'btn-success'},
-            {id: 'no', label: 'No', val: 'N', "class": 'btn-danger'},
+            {id: 'no', label: 'No', val: 'N', "class": 'btn-danger'}
         ];
 
         options = jQuery.extend({
@@ -302,7 +312,11 @@ jQuery.extend(Messi, {
 
     load: function (url, options) {
 
-        options = jQuery.extend(options || {}, {show: true, unload: true, params: {}});
+        options = jQuery.extend(options || {}, {
+            show: true,
+            unload: true,
+            params: {}
+        });
 
         var request = {
             url: url,
