@@ -198,7 +198,7 @@ Messi.prototype = {
         }).show().animate({opacity: 1}, 300);
 
         // cancelamos el scroll
-        //document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
 
         this.visible = true;
 
