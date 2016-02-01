@@ -213,7 +213,7 @@ Messi.prototype = {
             if (_this.options.modal && _this.modal != null) _this.modal.remove();
             _this.messi.css({display: 'none'}).remove();
             // reactivamos el scroll
-            //document.documentElement.style.overflow = "visible";
+            document.documentElement.style.overflow = "visible";
             _this.visible = false;
             if (after) after.call();
             if (_this.options.unload) _this.unload();
