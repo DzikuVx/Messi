@@ -95,6 +95,10 @@ function Messi(data, options) {
 
     }
 
+    $( "body" ).on( "click", ".modal-close", function() {
+        _this.hide();
+    });
+    
     // activamos la pantalla modal
     _this.modal = (_this.options.modal) ? jQuery('<div class="messi-modal"></div>').css({
         opacity: _this.options.modalOpacity,
