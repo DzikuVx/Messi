@@ -52,19 +52,26 @@ function Messi(data, options) {
     if (_this.options.buttons.length > 0) {
 
         for (var i = 0; i < _this.options.buttons.length; i++) {
+          var btnbox = jQuery('<div>', {'class':'btnbox'});
+          var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
+          var btn = jQuery('<button>', {
+              href: '#',
+              'class': 'btn ' + cls,
+              value: _this.options.buttons[i].val,
+              'click': function () {
+                  var value = $(this).val();
 
-            var cls = (_this.options.buttons[i]["class"]) ? _this.options.buttons[i]["class"] : '';
-            var btn = jQuery('<div class="btnbox"><button class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button></div>').data('value', _this.options.buttons[i].val);
-            btn.on('click', 'button', function () {
-                var value = jQuery.data(this, 'value');
-                var after = (_this.options.callback != null) ? function () {
-                    _this.options.callback(value);
-                } : null;
-                _this.hide(after);
-            });
+                  if (typeof _this.options.callback === 'function') {
+                      if (_this.options.callback(value) === false) {
+                          return this;
+                      }
+                  }
+                  _this.hide();
+              }
+          }).text(_this.options.buttons[i].label);
 
-            jQuery('.messi-actions', this.messi).append(btn);
-
+          btnbox.append(btn);
+          jQuery('.messi-actions', this.messi).append(btnbox);
         }
 
     } else {
